@@ -1,74 +1,128 @@
-# A Methods Atlas of Formula 1 Pit Stop Strategy and Lap Performance
+# Formula 1 Pit Stop Strategy and Lap Performance Analysis
 
-## Project Overview
+## Professional Summary
 
-This repository contains my MATH 4230 capstone project for Applied Statistical Methods for Data Science.
+This project is an end-to-end statistical learning analysis using Formula 1 lap-level strategy data. The goal was to compare regression and classification methods for two related problems: predicting lap time and predicting whether a driver will pit on the next lap.
 
-The project uses Formula 1 lap-level data to compare several statistical learning methods for two main tasks:
+The project was completed as a MATH 4230 capstone and is written as a methods atlas. It includes exploratory data analysis, model fitting, resampling, regularization, tree-based models, support vector machines, K-nearest neighbors, PCA, a neural network, and a final method comparison.
 
-1. Predicting lap time using regression methods.
-2. Predicting whether a driver will pit on the next lap using classification methods.
+The main takeaway is that the best method depends on the goal. Lasso regression performed best for lap-time prediction, while boosting performed best for pit-next-lap classification. Simpler models like logistic regression and decision trees were still useful because they were easier to interpret.
 
-The final report is written in LaTeX and includes exploratory data analysis, simple linear regression, multiple linear regression, logistic regression, cross-validation, bootstrap, ridge regression, lasso regression, decision trees, tree ensembles, support vector machines, K-nearest neighbors, PCA, a neural network, and a final method comparison.
+## Final Report
 
-## Dataset Source
+The full final report is available here:
 
-Dataset: **F1 Strategy Dataset | Pit Stop Prediction**  
-Source: Kaggle  
-Author: Aadi Gupta  
-Link: https://www.kaggle.com/datasets/aadigupta1601/f1-strategy-dataset-pit-stop-prediction/data  
-Date accessed: May 17, 2026
+[View Final PDF Report](report/A_Methods_Atlas_of_Formula_1_Pit_Stop_Strategy_and_Lap_Performance.pdf)
 
-The raw dataset is not included in this repository because large data files can cause GitHub upload issues. To reproduce the project, download the dataset from Kaggle and place the raw files in the correct local data folder before running the scripts.
+## Project Highlights
 
-## Main Research Questions
+- End-to-end statistical learning workflow
+- Formula 1 lap-level strategy data
+- Season-based train-test split
+- Regression and classification modeling
+- Model comparison across many methods
+- Lasso was best for lap-time prediction
+- Boosting was best for pit-next-lap prediction
+- Honest discussion of missing race-context variables
 
-The project focuses on two main modeling questions:
+## Featured Visuals
 
-1. Can lap-level predictors explain or predict `lap_time_s`?
-2. Can lap-level predictors predict `pit_next_lap`?
+### Pit-Next-Lap Class Balance
 
-The regression target is:
+This visual shows the imbalance in the classification target, where most laps are not followed by a pit stop.
 
-```text
-lap_time_s
-```
+![Pit-next-lap class balance](figures/ch02_eda/fig02_pit_next_lap_balance.png)
 
-The classification target is:
+### Pit-Next-Lap Rate by Tire Life
 
-```text
-pit_next_lap
-```
+This plot shows how the observed pit-next-lap rate changes as tire life increases.
+
+![Pit-next-lap rate by tire life](figures/ch02_eda/fig12_pit_rate_by_tyre_life.png)
+
+### Ridge and Lasso Test RMSE Comparison
+
+This visual compares regularized regression models on the 2025 test set, with lasso producing the best lap-time prediction result.
+
+![Ridge and lasso test RMSE comparison](figures/ch07_regularization/ch07_fig02_test_rmse_comparison.png)
+
+### Classification Ensemble Performance
+
+This visual compares ensemble classification models, where boosting produced the strongest AUC for pit-next-lap prediction.
+
+![Classification ensemble performance](figures/ch09_tree_ensembles/ch09_fig04_classification_ensemble_metrics.png)
 
 ## Main Results
 
-The best regression method was **lasso regression**. It had the lowest test RMSE for predicting lap time.
+| Task                    | Best Model       | Main Metric |  Result |
+| ----------------------- | ---------------- | ----------: | ------: |
+| Lap-time prediction     | Lasso regression |   Test RMSE | 10.4757 |
+| Pit-next-lap prediction | Boosting         |    Test AUC |  0.8608 |
 
-The best classification method was **boosting**. It had the strongest AUC for predicting whether a driver would pit on the next lap.
+## Research Questions
 
-The project also shows that interpretability matters. Logistic regression and decision trees were easier to explain, even when they were not always the strongest models by raw predictive performance.
+This project focuses on two main modeling questions.
+
+1. **Regression task:** Can lap-level predictors explain or predict `lap_time_s`?
+2. **Classification task:** Can lap-level predictors predict `pit_next_lap`?
+
+The regression task uses `lap_time_s` as the continuous response. The classification task uses `pit_next_lap` as the binary response.
+
+## Dataset
+
+- **Dataset:** F1 Strategy Dataset: Pit Stop Prediction
+- **Source:** Kaggle
+- **Author:** Aadi Gupta
+- **Link:** https://www.kaggle.com/datasets/aadigupta1601/f1-strategy-dataset-pit-stop-prediction/data
+- **Date accessed:** May 17, 2026
+
+The raw data is not included in this repository because of GitHub file-size and upload limits. To reproduce the project, download the dataset from Kaggle and place the raw files in a local `data/raw/` folder before running the scripts.
+
+## Methods Used
+
+- Exploratory data analysis
+- Simple linear regression
+- Multiple linear regression
+- Logistic regression
+- Cross-validation
+- Bootstrap
+- Ridge regression
+- Lasso regression
+- Decision trees
+- Bagging
+- Random forest
+- Boosting
+- Support vector machines
+- K-nearest neighbors
+- Principal components analysis
+- Neural network
 
 ## Repository Structure
 
 ```text
 .
 ├── README.md
-├── main_condensed.tex
-├── references_updated.bib
 ├── figures/
-│   ├── chapter figures used in the final report
-│   └── exploratory data analysis figures
+│   ├── ch02_eda/
+│   ├── ch03_slr/
+│   ├── ch04_mlr/
+│   ├── ch05_logistic/
+│   ├── ch06_resampling/
+│   ├── ch07_regularization/
+│   ├── ch08_decision_trees/
+│   ├── ch09_tree_ensembles/
+│   ├── ch10_svm/
+│   ├── ch11_knn/
+│   ├── ch12_pca/
+│   └── ch13_neural_network/
 ├── report/
-│   └── A_Methods_Atlas_of_Formula_1_Pit_Stop_Strategy_and_Lap_Performance FINAL.pdf
-├── results4github/
-│   └── tables/
-│       ├── summary_statistics.csv
-│       ├── method_comparison.csv
-│       ├── method_recommendations.csv
-│       └── selected chapter result tables
+│   └── A_Methods_Atlas_of_Formula_1_Pit_Stop_Strategy_and_Lap_Performance.pdf
+├── results/
+│   ├── method_comparison.csv
+│   ├── method_recommendations.csv
+│   └── summary_statistics.csv
 └── scripts/
     ├── 00_setup.R
-    ├── 01_clean_build_modeling_data.R
+    ├── 01_clean_data.R.R
     ├── 02_split_data.R
     ├── 03_dataset_profile_eda.R
     ├── 04_slr_lap_time.R
@@ -82,27 +136,27 @@ The project also shows that interpretability matters. Logistic regression and de
     ├── 12_knn.R
     ├── 13_pca.R
     ├── 14_neural_network.R
-    └── 15_method_comparison.R
+    ├── 15_method_comparison.R
+    ├── main.tex
+    └── references.bib
 ```
 
-## How to Reproduce the Project
+## How to Reproduce
 
-1. Clone this repository.
+1. Clone the repository.
 
 ```bash
-git clone https://github.com/amuro4/amuro4-A-Methods-Atlas-of-Formula-1-Pit-Stop-Strategy-and-Lap-Performance.git
-cd amuro4-A-Methods-Atlas-of-Formula-1-Pit-Stop-Strategy-and-Lap-Performance
+git clone https://github.com/amuro4/f1-pit-stop-strategy-analysis.git
+cd f1-pit-stop-strategy-analysis
 ```
 
 2. Download the dataset from Kaggle.
-
-Dataset link:
 
 ```text
 https://www.kaggle.com/datasets/aadigupta1601/f1-strategy-dataset-pit-stop-prediction/data
 ```
 
-3. Place the raw dataset files in the local project data folder.
+3. Place the raw dataset files in a local folder named:
 
 ```text
 data/raw/
@@ -114,7 +168,7 @@ data/raw/
 
 ```r
 source("scripts/00_setup.R")
-source("scripts/01_clean_build_modeling_data.R")
+source("scripts/01_clean_data.R.R")
 source("scripts/02_split_data.R")
 source("scripts/03_dataset_profile_eda.R")
 source("scripts/04_slr_lap_time.R")
@@ -133,64 +187,16 @@ source("scripts/15_method_comparison.R")
 
 6. Compile the LaTeX report.
 
-Main LaTeX file:
-
 ```text
-main_condensed.tex
-```
-
-Bibliography file:
-
-```text
-references_updated.bib
+scripts/main.tex
+scripts/references.bib
 ```
 
 The compiled final PDF is available in the `report/` folder.
 
-## Output Files
-
-Figures are saved in:
-
-```text
-figures/
-```
-
-Selected result tables for GitHub are saved in:
-
-```text
-results4github/tables/
-```
-
-The full local project may also create additional folders such as:
-
-```text
-results/tables/
-results/models/
-data/processed/
-```
-
-Some large outputs are intentionally excluded from GitHub to keep the repository small enough to upload.
-
-## Notes on Large Files
-
-GitHub has file size limits, so this repository does not include every large file generated during the project.
-
-Files that may be excluded include:
-
-```text
-data/raw/
-data/processed/
-results/models/
-large prediction CSV files
-.RData files
-.Rhistory files
-```
-
-The project can still be reproduced by downloading the dataset from Kaggle and running the scripts in order.
-
 ## R Packages Used
 
-Main R packages used in this project include:
+The project uses R and the following main packages:
 
 ```text
 tidyverse
@@ -214,24 +220,48 @@ nnet
 pROC
 ```
 
-The setup script loads the required packages and installs missing packages when needed.
+## Key Takeaway
 
-## Final Recommendation
+The best model depends on the goal.
 
-For lap-time regression, I recommend **lasso regression** because it had the best test RMSE while still being reasonably interpretable.
+For prediction, lasso regression and boosting were the strongest methods in this project. Lasso had the best test RMSE for lap-time prediction, and boosting had the best AUC for pit-next-lap prediction.
 
-For pit-next-lap classification, I recommend **boosting** because it had the strongest AUC.
-
-For explanation-focused work, I would also keep **logistic regression** and **decision trees** because they are easier to interpret and explain.
+For interpretation, logistic regression and decision trees were still valuable. Logistic regression gave interpretable probability-based results, while decision trees gave clear rule-based splits. This matters because a model that is easy to explain can be more useful than a black-box model in some reporting and decision-making settings.
 
 ## Limitations
 
-The dataset does not include several important race-status and circuit-condition variables, including Safety Car, Virtual Safety Car, yellow flags, red flags, track temperature, air temperature, circuit length, tire availability, and pit lane time loss.
+This project should be viewed as a comparison of statistical learning methods, not as a complete Formula 1 pit-wall strategy system.
 
-Because of this, the project should be viewed as a comparison of statistical learning methods rather than a complete Formula 1 strategy system.
+The dataset does not include several important race-status and circuit-condition variables, including:
+
+- Safety Car
+- Virtual Safety Car
+- Yellow flags
+- Red flags
+- Track temperature
+- Air temperature
+- Circuit length
+- Tire availability
+- Pit lane time loss
+- Team strategy context
+
+Because these variables are missing, some pit-stop decisions may look unexpected in the data even if they made sense in the actual race context.
+
+## Future Improvements
+
+Future versions of this project could improve the analysis by adding:
+
+- Race-status variables
+- Circuit-level features
+- Weather and temperature data
+- Pit lane time loss by circuit
+- Tuned pit-stop classification thresholds
+- An interactive dashboard or app
 
 ## Author
 
-Adrian Muro  
-MATH 4230 Applied Statistical Methods for Data Science  
-California State University, Bakersfield
+**Adrian Muro**  
+B.S. Mathematics, Statistical Data Science  
+California State University, Bakersfield  
+MATH 4230: Applied Statistical Methods for Data Science  
+Spring 2026
